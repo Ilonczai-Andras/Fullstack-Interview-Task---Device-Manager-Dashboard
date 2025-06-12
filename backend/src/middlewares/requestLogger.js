@@ -3,7 +3,7 @@ const requestLogger = (req, res, next) => {
   const method = req.method;
   const url = req.originalUrl;
   console.log(`[${timestamp}] ${method} ${url}`);
-  next(); // Don't forget to call next() to pass control to the next middleware
+  next();
 };
 
 export default requestLogger;

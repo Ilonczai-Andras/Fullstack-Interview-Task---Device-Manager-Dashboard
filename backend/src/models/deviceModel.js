@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const generateStatus = require('../utils/statusGenerator');
+import mongoose from 'mongoose';
+import generateStatus from '../utils/statusGenerator.js';
 
 const deviceSchema = new mongoose.Schema({
   name: {
@@ -20,7 +20,7 @@ const deviceSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ['active', 'error', 'inactive'],
-    default: 'active', // Kezdeti státusz lehet aktív
+    default: 'active',
     required: true,
   },
   location: {
@@ -28,16 +28,15 @@ const deviceSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  createdAt: { // Opcionális: Hozzáadás dátuma
+  createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-// Statikus metódus a státuszok frissítésére
 deviceSchema.statics.updateAllDeviceStatuses = async function() {
   try {
-    const devices = await this.find({}); // Lekéri az összes eszközt
+    const devices = await this.find({});
     const bulkOperations = devices.map(device => ({
       updateOne: {
         filter: { _id: device._id },
@@ -46,15 +45,14 @@ deviceSchema.statics.updateAllDeviceStatuses = async function() {
     }));
 
     if (bulkOperations.length > 0) {
-      await this.bulkWrite(bulkOperations); // Egyetlen kérésben frissíti az összeset
+      await this.bulkWrite(bulkOperations);
     }
     console.log('Device statuses updated in DB.');
   } catch (error) {
     console.error('Error updating device statuses:', error);
-    // Hiba kezelése, pl. logolás vagy értesítés
   }
 };
 
 const Device = mongoose.model('Device', deviceSchema);
 
-module.exports = Device; // Exportáljuk a Mongoose Modellt
+export default Device;

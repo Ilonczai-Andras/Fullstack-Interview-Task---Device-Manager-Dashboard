@@ -1,8 +1,10 @@
 import express from 'express';
-import { getSample } from '../controllers/sample.controller.js';
+import * as deviceController from '../controllers/deviceController.js';
 
 const router = express.Router();
 
-router.get('/', getSample);
+router.get('/', deviceController.getDevices);
+router.post('/', deviceController.addDevice);
+router.delete('/:id', deviceController.deleteDevice);
 
 export default router;
