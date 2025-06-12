@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { AddDeviceComponent } from "../add-device/add-device.component";
 import { Device } from '../../core/models/device.model';
 import { DeviceService } from '../../core/services/device.service';
+import { interval, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 interface Product {
   code: string;
@@ -22,17 +24,18 @@ interface Product {
 export class DeviceListComponent implements OnInit {
 
   devices: Device[] = [];
+  private subscription!: Subscription;
 
   constructor(private deviceService: DeviceService) {}
 
-  ngOnInit() {
-    this.deviceService.getDevices().subscribe((data: Device[]) => {
-      this.devices = data;
-      console.log('Devices fetched successfully:', this.devices);
-
-    }, error => {
-      console.error('Error fetching devices:', error);
-    });
+  ngOnInit(): void {
+    this.subscription = interval(4000).pipe(
+      switchMap(() => this.deviceService.getDevices())
+    )
+    .subscribe({
+      next: (data: Device[]) => this.devices = data,
+      error: (err: any) => console.error('API hiba:', err)
+});
   }
 
   stockSeverity(product: Product): 'success' | 'info' | 'warning' | 'danger' | null | undefined {
