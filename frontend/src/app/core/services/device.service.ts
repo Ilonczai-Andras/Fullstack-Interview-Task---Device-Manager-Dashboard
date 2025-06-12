@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Device } from '../models/device.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DeviceService {
   private apiUrl = 'http://localhost:5000/api/devices';
@@ -13,5 +13,9 @@ export class DeviceService {
 
   getDevices(): Observable<Device[]> {
     return this.http.get<Device[]>(this.apiUrl);
+  }
+
+  deleteDevice(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
