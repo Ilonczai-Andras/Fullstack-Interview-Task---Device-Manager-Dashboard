@@ -36,5 +36,4 @@ app.use(requestLogger);
 app.use('/api', appRoutes);
 
 // --- Error Handling Middleware ---
-// This must be the last middleware added
 app.use(errorHandler);

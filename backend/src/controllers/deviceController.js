@@ -5,7 +5,7 @@ export const getDevices = async (req, res, next) => {
     const devices = await deviceService.getAllDevices();
     res.status(200).json(devices);
   } catch (error) {
-    next(error); // Pass error to error handling middleware
+    next(error);
   }
 };
 
