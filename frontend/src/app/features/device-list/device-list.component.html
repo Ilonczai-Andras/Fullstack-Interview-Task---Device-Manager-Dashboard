@@ -5,6 +5,7 @@
             <th>Type</th>
             <th>Status</th>
             <th>Location</th>
+            <th></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-device>
@@ -13,6 +14,7 @@
             <td>{{ device.type }}</td>
             <td>{{ device.status }}</td>
             <td>{{ device.location }}</td>
+            <td><app-delete-device [deviceId]="device._id"/></td>
         </tr>
     </ng-template>
 </p-table>
