@@ -1,42 +1,18 @@
-<div class="p-8">
-  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
-    <div class="table-container">
-      <table class="w-full border-collapse">
-        <thead>
-          <tr class="bg-gray-100">
-            <!-- Apply custom header-cell and header-text classes for diagonal effect -->
-            <th class="header-cell rounded-tl-xl">
-              <span class="header-text">Name</span>
-            </th>
-            <th class="header-cell">
-              <span class="header-text">Type</span>
-            </th>
-            <th class="header-cell">
-              <span class="header-text">Status</span>
-            </th>
-            <th class="header-cell rounded-tr-xl">
-              <span class="header-text">Location</span>
-            </th>
-            <th class="header-cell rounded-tr-xl">
-              <span class="header-text"></span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Use *ngFor to iterate over the devices array -->
-          <ng-container *ngFor="let device of devices; let i = index">
-            <tr [ngClass]="{'striped-row': i % 2 === 0}">
-              <td class="body-cell">{{ device.name }}</td>
-              <td class="body-cell">{{ device.type }}</td>
-              <td class="body-cell">{{ device.status }}</td>
-              <td class="body-cell">{{ device.location }}</td>
-              <td class="body-cell">
-                <app-delete-device [deviceId]="device._id" (deleteSuccess)="handleDeviceDeleted()"></app-delete-device>
-              </td>
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<p-table class="custom-device-table" [value]="devices" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Location</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-device>
+        <tr>
+            <td>{{ device.name }}</td>
+            <td>{{ device.type }}</td>
+            <td>{{ device.status }}</td>
+            <td>{{ device.location }}</td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -1,83 +1,30 @@
-.table-container {
-  overflow-x: auto;
-  border-radius: 1rem;
-  padding: 1rem;
+.custom-device-table {
+  ::ng-deep .p-datatable {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-    thead {
-      tr {
-        background-color: #f7f7f7;
-
-        .header-cell {
-          position: relative;
-          padding: 1rem;
-          text-align: left;
-          font-weight: 600;
-          font-size: 0.95rem;
-          color: #333;
-          border-bottom: 2px solid #ddd;
-
-          &.rounded-tl-xl {
-            border-top-left-radius: 0.75rem;
-          }
-
-          &.rounded-tr-xl {
-            border-top-right-radius: 0.75rem;
-          }
-
-          .header-text {
-            display: block;
-
-            // Optional diagonal styling
-            transform: rotate(-10deg);
-            transform-origin: left bottom;
-            white-space: nowrap;
-          }
-        }
-      }
+    .p-datatable-thead > tr > th,
+    .p-datatable-tbody > tr > td {
+      text-align: center;
     }
 
-    tbody {
-      tr {
-        transition: background-color 0.2s ease;
-
-        &.striped-row {
-          background-color: #f9fafb;
-        }
-
-        &:hover {
-          background-color: #f1f5f9;
-        }
-
-        .body-cell {
-          padding: 0.85rem 1rem;
-          font-size: 0.92rem;
-          color: #444;
-          border-bottom: 1px solid #e5e7eb;
-        }
-      }
+    .p-datatable-thead > tr > th {
+      background-color: #f5f5f5;
+      color: #333;
+      font-weight: 600;
+      padding: 1rem;
+      border-bottom: 1px solid #ddd;
     }
 
-    button {
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
+    .p-datatable-tbody > tr > td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #eee;
+      color: #444;
+    }
 
-      &.delete-button {
-        background-color: #3b82f6; // blue-500
-        color: white;
-        padding: 0.4rem 0.8rem;
-        border-radius: 0.375rem;
-
-        &:hover {
-          background-color: #2563eb; // blue-600
-        }
-      }
+    .p-datatable-tbody > tr:hover {
+      background-color: #fafafa;
     }
   }
 }
