@@ -8,6 +8,7 @@ import { DeviceService } from '../../core/services/device.service';
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ButtonModule } from 'primeng/button';
+import { AddNewDeviceDialogComponent } from '../add-new-device-dialog/add-new-device-dialog.component';
 
 interface Product {
   code: string;
@@ -24,6 +25,7 @@ interface Product {
     CommonModule,
     DeleteDeviceComponent,
     ButtonModule,
+    AddNewDeviceDialogComponent,
   ],
   templateUrl: './device-list.component.html',
   styleUrl: './device-list.component.scss',

@@ -6,3 +6,10 @@ export interface Device {
   status: 'active' | 'error' | 'inactive';
   location: string;
 }
+
+export interface AddDevice {
+  name: string;
+  type: string;
+  ip: string;
+  location: string;
+}

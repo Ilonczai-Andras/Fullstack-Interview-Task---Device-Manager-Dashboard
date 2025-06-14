@@ -1,0 +1,75 @@
+<div class="card">
+  <p-button (click)="showDialog()" label="Add new device"></p-button>
+  <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '25rem' }">
+    <ng-template pTemplate="header">
+      <div class="dialog-header">
+        <span class="dialog-title">Device Information</span>
+      </div>
+    </ng-template>
+
+    <div class="form-group">
+      <label for="name" class="form-label">Name</label>
+      <input
+        pInputText
+        id="name"
+        class="form-input"
+        [(ngModel)]="device.name"
+        name="name"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="type" class="form-label">Type</label>
+      <input
+        pInputText
+        id="type"
+        class="form-input"
+        [(ngModel)]="device.type"
+        name="type"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="ip" class="form-label">IP Address</label>
+      <input
+        pInputText
+        id="ip"
+        class="form-input"
+        [(ngModel)]="device.ip"
+        name="ip"
+        required
+        [pattern]="ipPattern"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="location" class="form-label">Location</label>
+      <input
+        pInputText
+        id="location"
+        class="form-input"
+        [(ngModel)]="device.location"
+        name="location"
+        required
+      />
+    </div>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Cancel"
+        [text]="true"
+        severity="secondary"
+        (click)="visible = false"
+      ></p-button>
+      <p-button
+        label="Save"
+        [outlined]="true"
+        severity="primary"
+        (click)="saveDevice()"
+        [disabled]="!isFormValid()"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+</div>
