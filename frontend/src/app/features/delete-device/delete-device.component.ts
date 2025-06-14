@@ -1,10 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DeviceService } from '../../core/services/device.service';
 import { ButtonModule } from 'primeng/button';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-delete-device',
-  imports: [ButtonModule,],
+  imports: [ButtonModule, SweetAlert2Module],
   templateUrl: './delete-device.component.html',
   styleUrls: ['./delete-device.component.scss'],
 })
