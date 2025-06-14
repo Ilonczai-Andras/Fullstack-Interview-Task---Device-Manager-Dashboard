@@ -1,20 +1,59 @@
-<p-table class="custom-device-table" [value]="devices" [tableStyle]="{ 'min-width': '50rem' }">
+<div class="button-group mb-4">
+  <p-button
+    type="button"
+    icon="pi pi-chevron-left"
+    (click)="prev()"
+    [disabled]="isFirstPage()"
+    [text]="true"
+    class="nav-button"
+  />
+
+  <p-button
+    type="button"
+    icon="pi pi-refresh"
+    (click)="reset()"
+    [text]="true"
+    class="nav-button"
+  />
+
+  <p-button
+    type="button"
+    icon="pi pi-chevron-right"
+    (click)="next()"
+    [disabled]="isLastPage()"
+    [text]="true"
+    class="nav-button"
+  />
+</div>
+<div class="custom-device-table">
+  <p-table
+    [value]="devices"
+    [paginator]="true"
+    [rows]="10"
+    [first]="first"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} devices"
+    (onPage)="pageChange($event)"
+    [rowsPerPageOptions]="[5, 10, 15]"
+  >
     <ng-template pTemplate="header">
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Location</th>
-            <th></th>
-        </tr>
+      <tr>
+        <th style="width: 25%">Name</th>
+        <th style="width: 25%">Type</th>
+        <th style="width: 25%">Status</th>
+        <th style="width: 25%">Location</th>
+        <th></th>
+      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-device>
-        <tr>
-            <td>{{ device.name }}</td>
-            <td>{{ device.type }}</td>
-            <td>{{ device.status }}</td>
-            <td>{{ device.location }}</td>
-            <td><app-delete-device [deviceId]="device._id"/></td>
-        </tr>
+      <tr>
+        <td>{{ device.name }}</td>
+        <td>{{ device.type }}</td>
+        <td>{{ device.status }}</td>
+        <td>{{ device.location }}</td>
+        <td><app-delete-device [deviceId]="device._id" /></td>
+      </tr>
     </ng-template>
-</p-table>
+  </p-table>
+</div>

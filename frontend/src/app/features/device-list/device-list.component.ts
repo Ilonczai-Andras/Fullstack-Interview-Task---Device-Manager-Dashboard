@@ -6,7 +6,8 @@ import { DeleteDeviceComponent } from '../delete-device/delete-device.component'
 import { Device } from '../../core/models/device.model';
 import { DeviceService } from '../../core/services/device.service';
 import { interval, Subscription } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import { ButtonModule } from 'primeng/button';
 
 interface Product {
   code: string;
@@ -17,12 +18,21 @@ interface Product {
 
 @Component({
   selector: 'app-device-list',
-  imports: [TableModule, BadgeModule, CommonModule, DeleteDeviceComponent],
+  imports: [
+    TableModule,
+    BadgeModule,
+    CommonModule,
+    DeleteDeviceComponent,
+    ButtonModule,
+  ],
   templateUrl: './device-list.component.html',
   styleUrl: './device-list.component.scss',
 })
 export class DeviceListComponent implements OnInit {
   devices: Device[] = [];
+  first = 0;
+
+  rows = 10;
   private subscription!: Subscription;
 
   constructor(private deviceService: DeviceService) {}
@@ -41,10 +51,34 @@ export class DeviceListComponent implements OnInit {
   }
 
   handleDeviceDeleted(): void {
-    this.deviceService.getDevices()
-      .subscribe({
-        next: (data: Device[]) => (this.devices = data),
-        error: (err: any) => console.error('API hiba:', err),
-      });
+    this.deviceService.getDevices().subscribe({
+      next: (data: Device[]) => (this.devices = data),
+      error: (err: any) => console.error('API hiba:', err),
+    });
+  }
+
+  next() {
+    this.first = this.first + this.rows;
+  }
+
+  prev() {
+    this.first = this.first - this.rows;
+  }
+
+  reset() {
+    this.first = 0;
+  }
+
+  pageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+  }
+
+  isLastPage(): boolean {
+    return this.devices ? this.first + this.rows >= this.devices.length : true;
+  }
+
+  isFirstPage(): boolean {
+    return this.devices ? this.first === 0 : true;
   }
 }

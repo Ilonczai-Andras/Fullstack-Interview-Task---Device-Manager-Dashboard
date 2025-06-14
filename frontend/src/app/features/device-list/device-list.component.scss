@@ -28,3 +28,26 @@
     }
   }
 }
+
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  .nav-button ::ng-deep button {
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    color: #495057;
+
+    &:hover:not(:disabled) {
+      background-color: #f0f0f0;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+

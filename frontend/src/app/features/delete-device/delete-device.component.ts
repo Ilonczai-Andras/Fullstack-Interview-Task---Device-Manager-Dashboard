@@ -1,8 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DeviceService } from '../../core/services/device.service';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-delete-device',
+  imports: [ButtonModule,],
   templateUrl: './delete-device.component.html',
   styleUrls: ['./delete-device.component.scss'],
 })
