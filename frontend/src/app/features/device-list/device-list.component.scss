@@ -27,6 +27,11 @@
       background-color: #fafafa;
     }
   }
+
+  ::ng-deep .p-paginator {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .button-group {
@@ -51,3 +56,53 @@
   }
 }
 
+::ng-deep .p-dialog {
+  z-index: 1100 !important;
+}
+
+::ng-deep .p-dialog-mask {
+  z-index: 1099 !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  pointer-events: all !important;
+}
+
+::ng-deep .p-dialog-mask-visible {
+  ~ * .p-paginator,
+  ~ * .p-datatable-paginator {
+    visibility: hidden !important;
+  }
+
+  ~ * .p-datatable {
+    pointer-events: none !important;
+  }
+
+  ~ * .delete-button {
+    pointer-events: none !important;
+
+    ::ng-deep button {
+      opacity: 0.3 !important;
+      background-color: #6c757d !important;
+      filter: grayscale(100%) !important;
+      cursor: not-allowed !important;
+
+      &:hover {
+        background-color: #6c757d !important;
+        transform: none !important;
+      }
+    }
+  }
+}
+
+:host-context(body.p-overflow-hidden) {
+  ::ng-deep .p-paginator {
+    visibility: hidden !important;
+  }
+
+  ::ng-deep .p-datatable {
+    pointer-events: none !important;
+  }
+
+  ::ng-deep button:not(.p-dialog button):not(.p-dialog-header button) {
+    pointer-events: none !important;
+  }
+}

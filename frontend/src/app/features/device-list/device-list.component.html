@@ -43,7 +43,7 @@
         <th style="width: 25%">Type</th>
         <th style="width: 25%">Status</th>
         <th style="width: 25%">Location</th>
-        <th><app-add-new-device-dialog/></th>
+        <th><app-add-new-device-dialog (SaveSuccess)="getDevices()"/></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-device>
@@ -52,7 +52,7 @@
         <td>{{ device.type }}</td>
         <td>{{ device.status }}</td>
         <td>{{ device.location }}</td>
-        <td><app-delete-device [deviceId]="device._id" /></td>
+        <td><app-delete-device [deviceId]="device._id" (deleteSuccess)="handleDeviceDeleted()"/></td>
       </tr>
     </ng-template>
   </p-table>

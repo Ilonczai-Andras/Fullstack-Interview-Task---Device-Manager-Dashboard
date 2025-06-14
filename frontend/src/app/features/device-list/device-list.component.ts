@@ -8,7 +8,7 @@ import { DeviceService } from '../../core/services/device.service';
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ButtonModule } from 'primeng/button';
-import { AddNewDeviceDialogComponent } from '../add-new-device-dialog/add-new-device-dialog.component';
+import { AddNewDeviceDialogComponent } from '../add-new-device-form/add-new-device-dialog.component';
 
 interface Product {
   code: string;
@@ -40,16 +40,27 @@ export class DeviceListComponent implements OnInit {
   constructor(private deviceService: DeviceService) {}
 
   ngOnInit(): void {
-    this.getDevices();
+    this.getDevicesAfter4s();
   }
 
-  getDevices(): void {
+  getDevicesAfter4s(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
     this.subscription = interval(4000)
       .pipe(switchMap(() => this.deviceService.getDevices()))
       .subscribe({
         next: (data: Device[]) => (this.devices = data),
         error: (err: any) => console.error('API hiba:', err),
       });
+  }
+
+  getDevices(): void {
+    this.deviceService.getDevices().subscribe({
+      next: (data: Device[]) => (this.devices = data),
+      error: (err: any) => console.error('API hiba:', err),
+    });
   }
 
   handleDeviceDeleted(): void {
