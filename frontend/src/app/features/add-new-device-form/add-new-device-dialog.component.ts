@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DeviceService } from '../../core/services/device.service';
 
 @Component({
   selector: 'app-add-new-device-dialog',
@@ -26,11 +27,10 @@ export class AddNewDeviceDialogComponent {
   visible: boolean = false;
   deviceForm: FormGroup;
 
-  // IP address validation pattern
   private ipPattern =
     /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private deviceService: DeviceService) {
     this.deviceForm = this.createForm();
   }
 
@@ -81,12 +81,17 @@ export class AddNewDeviceDialogComponent {
       const deviceData = this.deviceForm.value;
       console.log('Device data:', deviceData);
 
-      // Here you would typically call a service to save the device
-      // this.deviceService.saveDevice(deviceData).subscribe(...)
+      this.deviceService.saveDevice(deviceData).subscribe({
+        next: () => {
+          console.log('Saved new device successfully');
+        },
+        error: (err) => {
+          console.error('Error saving device', err);
+        },
+      });
 
       this.closeDialog();
     } else {
-      // Mark all fields as touched to show validation errors
       this.markFormGroupTouched();
     }
   }

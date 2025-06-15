@@ -4,7 +4,7 @@
   <p-dialog
     [(visible)]="visible"
     [modal]="true"
-    [style]="{ width: '25rem' }"
+    [appendTo]="'body'"
     [closable]="true"
     (onHide)="closeDialog()"
   >
