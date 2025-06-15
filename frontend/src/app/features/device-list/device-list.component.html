@@ -1,30 +1,33 @@
-<div class="button-group mb-4">
-  <p-button
-    type="button"
-    icon="pi pi-chevron-left"
-    (click)="prev()"
-    [disabled]="isFirstPage()"
-    [text]="true"
-    class="nav-button"
-  />
+<div class="device-table-header flex justify-between items-center mb-2">
+  <div class="button-group">
+    <p-button
+      type="button"
+      icon="pi pi-chevron-left"
+      (click)="prev()"
+      [disabled]="isFirstPage()"
+      [text]="true"
+      class="nav-button"
+    />
+    <p-button
+      type="button"
+      icon="pi pi-refresh"
+      (click)="reset()"
+      [text]="true"
+      class="nav-button"
+    />
+    <p-button
+      type="button"
+      icon="pi pi-chevron-right"
+      (click)="next()"
+      [disabled]="isLastPage()"
+      [text]="true"
+      class="nav-button"
+    />
+  </div>
 
-  <p-button
-    type="button"
-    icon="pi pi-refresh"
-    (click)="reset()"
-    [text]="true"
-    class="nav-button"
-  />
-
-  <p-button
-    type="button"
-    icon="pi pi-chevron-right"
-    (click)="next()"
-    [disabled]="isLastPage()"
-    [text]="true"
-    class="nav-button"
-  />
+  <app-add-new-device-dialog (SaveSuccess)="getDevices()"></app-add-new-device-dialog>
 </div>
+
 <div class="custom-device-table">
   <p-table
     [value]="devices"
@@ -43,7 +46,7 @@
         <th style="width: 25%">Type</th>
         <th style="width: 25%">Status</th>
         <th style="width: 25%">Location</th>
-        <th><app-add-new-device-dialog (SaveSuccess)="getDevices()"/></th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-device>
@@ -55,6 +58,11 @@
         <td><app-delete-device [deviceId]="device._id" (deleteSuccess)="getDevices()"/></td>
       </tr>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="5" class="text-center">No device to display.</td>
+    </tr>
+  </ng-template>
   </p-table>
 </div>
 <ngx-skeleton-loader count={{rows}} appearance="line" *ngIf="loading"></ngx-skeleton-loader>
