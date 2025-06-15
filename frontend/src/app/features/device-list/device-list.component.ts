@@ -6,10 +6,11 @@ import { DeleteDeviceComponent } from '../delete-device/delete-device.component'
 import { Device } from '../../core/models/device.model';
 import { DeviceService } from '../../core/services/device.service';
 import { interval, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, finalize } from 'rxjs/operators';
 import { ButtonModule } from 'primeng/button';
 import { AddNewDeviceDialogComponent } from '../add-new-device-form/add-new-device-dialog.component';
 import { DeviceDashboardComponent } from '../device-dashboard/device-dashboard.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 interface Product {
   code: string;
@@ -28,6 +29,7 @@ interface Product {
     ButtonModule,
     AddNewDeviceDialogComponent,
     DeviceDashboardComponent,
+    NgxSkeletonLoaderModule,
   ],
   templateUrl: './device-list.component.html',
   styleUrl: './device-list.component.scss',
@@ -35,9 +37,10 @@ interface Product {
 export class DeviceListComponent implements OnInit {
   devices: Device[] = [];
   first = 0;
-
   rows = 10;
   private subscription!: Subscription;
+  loading = true;
+  private isInitialLoad = true;
 
   constructor(private deviceService: DeviceService) {}
 
@@ -50,26 +53,50 @@ export class DeviceListComponent implements OnInit {
       this.subscription.unsubscribe();
     }
 
+    this.loading = true;
+    this.deviceService
+      .getDevices()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (data: Device[]) => {
+          this.devices = data;
+          this.isInitialLoad = false;
+          this.startPeriodicUpdates();
+        },
+        error: (err: any) => {
+          console.error('API hiba:', err);
+          this.isInitialLoad = false;
+          this.startPeriodicUpdates();
+        },
+      });
+  }
+
+  private startPeriodicUpdates(): void {
     this.subscription = interval(4000)
       .pipe(switchMap(() => this.deviceService.getDevices()))
       .subscribe({
-        next: (data: Device[]) => (this.devices = data),
-        error: (err: any) => console.error('API hiba:', err),
+        next: (data: Device[]) => {
+          this.devices = data;
+        },
+        error: (err: any) => {
+          console.error('API hiba:', err);
+        },
       });
   }
 
   getDevices(): void {
-    this.deviceService.getDevices().subscribe({
-      next: (data: Device[]) => (this.devices = data),
-      error: (err: any) => console.error('API hiba:', err),
-    });
-  }
-
-  handleDeviceDeleted(): void {
-    this.deviceService.getDevices().subscribe({
-      next: (data: Device[]) => (this.devices = data),
-      error: (err: any) => console.error('API hiba:', err),
-    });
+    this.loading = true;
+    this.deviceService
+      .getDevices()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (data: Device[]) => {
+          this.devices = data;
+        },
+        error: (err: any) => {
+          console.error('API hiba:', err);
+        },
+      });
   }
 
   next() {
