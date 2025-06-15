@@ -4,11 +4,21 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimationsAsync(),
+    providePrimeNG({           // add this
+      theme: {                 // add this
+        preset: Aura,          // add this
+      },                       // add this
+    }),
     importProvidersFrom(HttpClientModule),
     importProvidersFrom([SweetAlert2Module.forRoot()]),
     provideNoopAnimations(),
