@@ -21,6 +21,7 @@ interface Product {
 
 @Component({
   selector: 'app-device-list',
+  standalone: true,
   imports: [
     TableModule,
     BadgeModule,

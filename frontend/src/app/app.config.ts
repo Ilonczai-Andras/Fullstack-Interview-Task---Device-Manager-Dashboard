@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
+import { MessageService } from 'primeng/api';
 
 
 export const appConfig: ApplicationConfig = {
@@ -14,13 +15,14 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    providePrimeNG({           // add this
-      theme: {                 // add this
-        preset: Aura,          // add this
-      },                       // add this
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+      },
     }),
     importProvidersFrom(HttpClientModule),
     importProvidersFrom([SweetAlert2Module.forRoot()]),
     provideNoopAnimations(),
+    MessageService,
   ]
 };

@@ -5,6 +5,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-delete-device',
+  standalone: true,
   imports: [ButtonModule, SweetAlert2Module],
   templateUrl: './delete-device.component.html',
   styleUrls: ['./delete-device.component.scss'],

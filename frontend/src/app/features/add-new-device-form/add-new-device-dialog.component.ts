@@ -10,9 +10,11 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DeviceService } from '../../core/services/device.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-add-new-device-dialog',
+  standalone: true,
   imports: [
     ButtonModule,
     DialogModule,
@@ -30,7 +32,11 @@ export class AddNewDeviceDialogComponent {
   private ipPattern =
     /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
-  constructor(private fb: FormBuilder, private deviceService: DeviceService) {
+  constructor(
+    private fb: FormBuilder,
+    private deviceService: DeviceService,
+    private messageService: MessageService
+  ) {
     this.deviceForm = this.createForm();
   }
 
@@ -84,9 +90,19 @@ export class AddNewDeviceDialogComponent {
       this.deviceService.saveDevice(deviceData).subscribe({
         next: () => {
           console.log('Saved new device successfully');
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Device saved successfully',
+          });
         },
         error: (err) => {
           console.error('Error saving device', err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Failed to save device',
+          });
         },
       });
 
