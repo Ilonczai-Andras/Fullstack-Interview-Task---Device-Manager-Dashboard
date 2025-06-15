@@ -239,29 +239,6 @@ body.p-overflow-hidden {
   }
 }
 
-// Responsive design
-@media (max-width: 768px) {
-  ::ng-deep .p-dialog {
-    width: 95vw !important;
-    margin: 1rem;
-
-    .p-dialog-header,
-    .p-dialog-content,
-    .p-dialog-footer {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
-
-  .form-group {
-    margin-bottom: 1.25rem;
-
-    &:has(.error-message:not(:empty)) {
-      margin-bottom: 1.75rem;
-    }
-  }
-}
-
 // Animation enhancements
 ::ng-deep .p-dialog-enter {
   animation: dialogSlideIn 0.3s ease-out;
@@ -271,68 +248,8 @@ body.p-overflow-hidden {
   animation: dialogSlideOut 0.2s ease-in;
 }
 
-@keyframes dialogSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes dialogSlideOut {
-  from {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-  }
-}
-
 // Focus management
 .form-input:focus-visible {
   outline: 2px solid #667eea;
   outline-offset: 2px;
-}
-
-// Form validation visual feedback
-::ng-deep .p-dialog-content {
-  .ng-invalid.ng-touched {
-    .form-input {
-      animation: shake 0.3s ease-in-out;
-    }
-  }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-2px); }
-  75% { transform: translateX(2px); }
-}
-
-// Loading state for form submission
-.form-loading {
-  pointer-events: none;
-  opacity: 0.7;
-
-  .form-input {
-    background-color: #f9fafb;
-  }
-}
-
-// Success state animation
-.form-success {
-  .form-input {
-    animation: successPulse 0.6s ease-in-out;
-  }
-}
-
-@keyframes successPulse {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }

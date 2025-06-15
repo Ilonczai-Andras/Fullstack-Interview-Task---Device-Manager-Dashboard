@@ -1,0 +1,160 @@
+// Variables
+$white: #ffffff;
+$text-primary: #2c3e50;
+$text-secondary: #7f8c8d;
+$success: #4CAF50;
+$danger: #f44336;
+$border-light: rgba(0, 0, 0, 0.05);
+$shadow-light: 0 8px 25px rgba(0, 0, 0, 0.08);
+$shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.12);
+$border-radius: 15px;
+$transition: all 0.3s ease;
+
+// Host component styling
+:host {
+  display: block;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+// Card styling
+.card {
+  background: $white;
+  border-radius: $border-radius;
+  padding: 20px;
+  box-shadow: $shadow-light;
+  border: 1px solid $border-light;
+  margin-bottom: 20px;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-hover;
+  }
+
+  // Controls row styling (buttons + variables in one row)
+  .controls-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .variable-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      background: #f8f9fa;
+      border-radius: 25px;
+      border: 1px solid #e9ecef;
+      text-align: center;
+      height: 48px; // Same height as buttons
+      min-width: 80px;
+
+      .variable-label {
+        font-size: 10px;
+        color: $text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        line-height: 1;
+        margin-bottom: 2px;
+      }
+
+      .variable-value {
+        font-size: 16px;
+        font-weight: 700;
+        color: $text-primary;
+        line-height: 1;
+      }
+    }
+  }
+
+  // PrimeNG button styling
+  ::ng-deep p-button {
+    .p-button {
+      background: linear-gradient(45deg, $success, darken($success, 10%));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: $transition;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba($success, 0.3);
+      text-transform: none;
+      min-width: 140px;
+      justify-content: center;
+
+      &:enabled:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($success, 0.4);
+        background: linear-gradient(45deg, darken($success, 5%), darken($success, 15%));
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba($success, 0.2);
+      }
+
+      // Trash button styling
+      &.p-button-danger {
+        background: linear-gradient(45deg, $danger, darken($danger, 10%));
+        box-shadow: 0 4px 15px rgba($danger, 0.3);
+
+        &:enabled:hover {
+          box-shadow: 0 6px 20px rgba($danger, 0.4);
+          background: linear-gradient(45deg, darken($danger, 5%), darken($danger, 15%));
+        }
+      }
+
+      // When refreshing (pause button styling)
+      &.p-button-secondary {
+        background: linear-gradient(45deg, $danger, darken($danger, 10%));
+        box-shadow: 0 4px 15px rgba($danger, 0.3);
+
+        &:enabled:hover {
+          box-shadow: 0 6px 20px rgba($danger, 0.4);
+          background: linear-gradient(45deg, darken($danger, 5%), darken($danger, 15%));
+        }
+      }
+
+      .p-button-icon {
+        font-size: 16px;
+      }
+
+      .p-button-label {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// PrimeNG Chart styling
+::ng-deep p-chart {
+  .p-chart {
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 1px solid #e9ecef;
+    padding: 20px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+
+    canvas {
+      border-radius: 8px;
+    }
+  }
+}
+
+// Animations
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

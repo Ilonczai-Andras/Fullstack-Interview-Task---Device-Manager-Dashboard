@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="controls-row">
+    <p-button
+      (click)="toggleRefresh()"
+      [icon]="isRefreshing ? 'pi pi-pause' : 'pi pi-play'"
+    >
+    </p-button>
+    <p-button (click)="clearChart()" [icon]="'pi pi-trash'"> </p-button>
+
+    <div class="variable-item">
+      <span class="variable-label">Active</span>
+      <span class="variable-value">{{ countData.active }}</span>
+    </div>
+    <div class="variable-item">
+      <span class="variable-label">Error</span>
+      <span class="variable-value">{{ countData.error }}</span>
+    </div>
+    <div class="variable-item">
+      <span class="variable-label">Inactive</span>
+      <span class="variable-value">{{ countData.inactive }}</span>
+    </div>
+  </div>
+</div>
+
+<p-chart
+  type="line"
+  [data]="chartData"
+  [options]="chartOptions"
+  style="height: 400px">
+</p-chart>
