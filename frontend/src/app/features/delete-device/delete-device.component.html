@@ -1,10 +1,11 @@
-<p-button
-  icon="pi pi-trash"
+<button
   class="delete-button"
   [swal]="{
     title: 'Confirmation',
     text: 'Are you sure u want to delete this device?',
     showCancelButton: true,
   }"
-  (confirm)="deleteDevice()">
-</p-button>
+  (confirm)="deleteDevice()"
+>
+  Delete
+</button>

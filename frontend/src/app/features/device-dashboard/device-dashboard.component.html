@@ -1,11 +1,9 @@
 <div class="card">
   <div class="controls-row">
-    <p-button
-      (click)="toggleRefresh()"
-      [icon]="isRefreshing ? 'pi pi-pause' : 'pi pi-play'"
-    >
-    </p-button>
-    <p-button (click)="clearChart()" [icon]="'pi pi-trash'"> </p-button>
+    <button class="button" (click)="toggleRefresh()">
+      {{ isRefreshing ? "Pause" : "Play" }}
+    </button>
+    <button class="button" (click)="clearChart()">Clear</button>
 
     <div class="variable-item">
       <span class="variable-label">Active</span>
@@ -26,5 +24,6 @@
   type="line"
   [data]="chartData"
   [options]="chartOptions"
-  style="height: 400px">
+  style="height: 400px"
+>
 </p-chart>

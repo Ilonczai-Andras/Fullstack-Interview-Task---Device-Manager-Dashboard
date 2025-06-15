@@ -27,12 +27,6 @@ $transition: all 0.3s ease;
   border: 1px solid $border-light;
   margin-bottom: 20px;
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: $shadow-hover;
-  }
-
-  // Controls row styling (buttons + variables in one row)
   .controls-row {
     display: flex;
     align-items: center;
@@ -71,8 +65,7 @@ $transition: all 0.3s ease;
   }
 
   // PrimeNG button styling
-  ::ng-deep p-button {
-    .p-button {
+  .button {
       background: linear-gradient(45deg, $success, darken($success, 10%));
       color: white;
       border: none;
@@ -98,63 +91,5 @@ $transition: all 0.3s ease;
       &:focus {
         box-shadow: 0 0 0 2px rgba($success, 0.2);
       }
-
-      // Trash button styling
-      &.p-button-danger {
-        background: linear-gradient(45deg, $danger, darken($danger, 10%));
-        box-shadow: 0 4px 15px rgba($danger, 0.3);
-
-        &:enabled:hover {
-          box-shadow: 0 6px 20px rgba($danger, 0.4);
-          background: linear-gradient(45deg, darken($danger, 5%), darken($danger, 15%));
-        }
-      }
-
-      // When refreshing (pause button styling)
-      &.p-button-secondary {
-        background: linear-gradient(45deg, $danger, darken($danger, 10%));
-        box-shadow: 0 4px 15px rgba($danger, 0.3);
-
-        &:enabled:hover {
-          box-shadow: 0 6px 20px rgba($danger, 0.4);
-          background: linear-gradient(45deg, darken($danger, 5%), darken($danger, 15%));
-        }
-      }
-
-      .p-button-icon {
-        font-size: 16px;
-      }
-
-      .p-button-label {
-        font-weight: 600;
-      }
     }
-  }
-}
-
-// PrimeNG Chart styling
-::ng-deep p-chart {
-  .p-chart {
-    border-radius: 10px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    border: 1px solid #e9ecef;
-    padding: 20px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
-
-    canvas {
-      border-radius: 8px;
-    }
-  }
-}
-
-// Animations
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
