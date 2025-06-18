@@ -83,7 +83,7 @@ The frontend application will run on `http://localhost:4200`.
 
 ## 📁 Project Structure
 
-```
+
 project-root/
 ├── frontend/                 # Angular application
 │   ├── src/
@@ -103,15 +103,15 @@ project-root/
 │   └── server.js
 ├── README.md
 └── .gitignore
-```
+
 
 ## 🔧 Available Scripts
-
+```
 ### Backend Scripts
 ```bash
 npm run dev        # Start development server with nodemon
-```
 
+```
 ### Frontend Scripts  
 ```bash
 ng serve           # Start development server
